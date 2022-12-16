@@ -1,7 +1,6 @@
 dash
 pandas
 plotly
-collections
 regex
 datetime
 gunicorn
