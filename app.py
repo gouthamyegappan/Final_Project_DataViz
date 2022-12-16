@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[65]:
+# In[1]:
 
 
 from dash import html
@@ -22,19 +22,19 @@ import gunicorn
 import dns
 
 
-# In[14]:
+# In[3]:
 
 
-data = pd.read_csv('Final Project/final_data.csv').drop('Unnamed: 0', axis = 1)
+data = pd.read_csv('final_data.csv').drop('Unnamed: 0', axis = 1)
 
 
-# In[31]:
+# In[4]:
 
 
 data = data.dropna(subset = ['title'])
 
 
-# In[34]:
+# In[5]:
 
 
 vals = [v.lower() for v in data['title']]
@@ -44,7 +44,7 @@ vals = [list(set(v.split())) for v in vals]
 data_words = vals
 
 
-# In[35]:
+# In[6]:
 
 
 def wanted_search(title):
@@ -62,7 +62,7 @@ def wanted_search(title):
     return counts
 
 
-# In[40]:
+# In[7]:
 
 
 vals = wanted_search('- YouTube')
@@ -77,7 +77,7 @@ fig_youtube = px.bar(x = vals.index, y = vals[0], title='Most Watched Youtube Vi
 fig_youtube.update_xaxes(tickfont_size=11)
 
 
-# In[41]:
+# In[8]:
 
 
 tiktok_data = data[[True if 'TikTok' in t else False for t in data['title']]]
@@ -92,7 +92,7 @@ fig_tiktok = px.bar(x = vals2.index, y = vals2.values, title='Most Watched TikTo
 fig_tiktok.update_xaxes(tickfont_size=8)
 
 
-# In[48]:
+# In[9]:
 
 
 def days_passed():
@@ -107,7 +107,7 @@ day_pass += 1
 week_pass = day_pass/7
 
 
-# In[55]:
+# In[10]:
 
 
 num_to_day = {0: 'Sunday', 1:'Monday', 2:'Tuesday', 3:'Wednesday', 4:'Thursday', 5:'Friday', 6: 'Saturday'}
@@ -118,7 +118,7 @@ def get_week_data(df):
     return week_of_day_data
 
 
-# In[59]:
+# In[15]:
 
 
 # Load Data
@@ -127,6 +127,7 @@ df = px.data.tips()
 # Build App
 app = JupyterDash(__name__)
 server = app.server
+
 app.layout = html.Div([
     html.H1("Time Waster Analysis"),
     html.P('Use the tool below to identify the types of internet usage that you consider to be wasteful. Once you hover over a group, the terms that \
@@ -234,5 +235,12 @@ def update_week_figure(waste_idx):
     return week_graph
     
 # Run app and display result inline in the notebook
-app.run_server(port=9100)
+# app.run_server(port=9100)
+
+
+# In[16]:
+
+
+if __name__ == '__main__':
+    app.run_server()
 
