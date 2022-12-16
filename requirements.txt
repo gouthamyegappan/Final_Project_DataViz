@@ -6,3 +6,4 @@ datetime
 gunicorn
 dnspython
 nbconvert
+jupyter_dash
