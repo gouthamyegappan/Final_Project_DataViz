@@ -1,0 +1,9 @@
+dash
+pandas
+plotly
+collections
+regex
+datetime
+gunicorn
+dnspython
+nbconvert
